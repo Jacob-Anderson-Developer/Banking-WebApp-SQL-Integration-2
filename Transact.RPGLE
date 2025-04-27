@@ -25,7 +25,7 @@
          Return;
        Else;
          Write Bal;
-         Message = ‘Transaction Successful’;
+         Message = 'Transaction Successful';
        EndIf;
 
        Clear Amount;
