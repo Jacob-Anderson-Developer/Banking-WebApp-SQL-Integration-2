@@ -13,18 +13,7 @@
          Message        Char(35);
        END-PI;
 
-       Read(e) BalanceTab;
-
-       Dow Not %Eof(BalanceTab);
-         If TRANSTYPE = 'W';
-           Withdrawal += Amount;
-         Else;
-           Deposit += Amount;
-         EndIf;
-         Read BalanceTab;
-       EndDo;
-
-       Balance = Deposit - Withdrawal;
+       ExSr GetBalance;
 
        TransType = TType;
        TransTime = %Timestamp(*Sys);
@@ -44,18 +33,24 @@
 
        SetLL *Start BalanceTab;
 
-       Read(e) BalanceTab;
-
-       Dow Not %Eof(BalanceTab);
-         If TRANSTYPE = 'W';
-           Withdrawal += Amount;
-         Else;
-           Deposit += Amount;
-         EndIf;
-         Read BalanceTab;
-       EndDo;
-
-       Balance = Deposit - Withdrawal;
+       ExSr GetBalance;
 
        *inlr = *on;
        return;
+
+       BegSr GetBalance;
+
+         Read(e) BalanceTab;
+
+         Dow Not %Eof(BalanceTab);
+           If TRANSTYPE = 'W';
+             Withdrawal += Amount;
+           Else;
+             Deposit += Amount;
+           EndIf;
+           Read BalanceTab;
+         EndDo;
+
+         Balance = Deposit - Withdrawal;
+
+       EndSr;
