@@ -1,5 +1,4 @@
        ctl-opt option(*nodebugio:*srcstmt) ;
-      **Free
 
        Dcl-F BalanceTab Disk Usage(*Input:*Output);
 
@@ -31,15 +30,10 @@
        TransTime = %Timestamp(*Sys);
        Amount = Amt;
 
-       If TType = 'W';
-
-         If Amt > Balance;
-           Message = 'Withdrawal Amount Exceeds Balance';
-           *INLR = *On;
-           Return;
-         Else;
-           Write Bal;
-         EndIf;
+       If TType = 'W' And Amt > Balance;
+         Message = 'Withdrawal Amount Exceeds Balance';
+         *INLR = *On;
+         Return;
        Else;
          Write Bal;
        EndIf;
@@ -64,4 +58,4 @@
        Balance = Deposit - Withdrawal;
 
        *inlr = *on;
-       return; 
+       return;
