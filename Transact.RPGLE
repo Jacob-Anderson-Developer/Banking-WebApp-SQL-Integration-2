@@ -7,9 +7,9 @@
        Dcl-S TransType  Char(1);
 
        DCL-PI *n;
-         Amt            Packed(15:5);
+         Amt            Packed(15:2);
          TType          Char(1);
-         Balance        Packed(15:5);
+         Balance        Packed(15:2);
          Message        Char(35);
        END-PI;
 
