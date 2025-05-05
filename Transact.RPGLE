@@ -15,6 +15,11 @@
 
        ExSr GetBalance;
 
+       If TType = *Blank;
+         *INLR = *On;
+         Return;
+       EndIf;
+
        TransType = TType;
        TransTime = %Timestamp(*Sys);
        Amount = Amt;
